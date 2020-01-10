@@ -1,3 +1,4 @@
+#JAN 10th 2020 T.I. fixed unwanted brackets issue
 #JAN 10th 2020 T.I. GUI framework
 #JAN 10th 2020 T.I. refactor
 #JAN 10th 2020 T.I. modified output structure (RankedlineList1)
@@ -28,9 +29,10 @@ def generateAnsSheet():
 
     for [number,desc,title] in RankedlineList1:
         print(number,desc,title)
-        ansSheetOutut_entry.insert(tk.END,[number,desc,title])
-        ansSheetOutut_entry.insert(tk.END,'\n')
-
+        listString=" ".join([number,desc,":",title,'\n'])
+        ansSheetOutut_entry.insert(tk.END,listString)
+    print([number,desc,title])
+  
 
 window = tk.Tk()
 
