@@ -1,3 +1,4 @@
+#JAN 11th 2020 T.I. refactor
 #JAN 11th 2020 T.I. fixed "string ends with empty" problem
 #JAN 10th 2020 T.I. fixed unwanted brackets problem
 #JAN 10th 2020 T.I. GUI framework
@@ -8,7 +9,7 @@
 import tkinter as tk
 
 def generateAnsSheet():
-    listget1=ansInput_text.get("1.0", "end-1c").splitlines()
+    listget1=quesInput_text.get("1.0", "end-1c").splitlines()
    
     lineList1 = [line.rstrip(' \n') for line in listget1 if (line.startswith('Across') is False) and (line.startswith('Down') is False)]
     RankedlineList1=[None] * len(lineList1)
@@ -35,10 +36,10 @@ def generateAnsSheet():
 
 window = tk.Tk()
 
-ansInput_text = tk.Text(window)
-ansInput_text["width"] = 100
-ansInput_text["height"] = 10
-ansInput_text.pack()
+quesInput_text = tk.Text(window)
+quesInput_text["width"] = 100
+quesInput_text["height"] = 10
+quesInput_text.pack()
 
 descripInput_text = tk.Text(window)
 descripInput_text["width"] = 100
@@ -50,7 +51,7 @@ ansSheetOutput_text["width"] = 100
 ansSheetOutput_text["height"] = 10
 ansSheetOutput_text.pack()
 
-calculate_btn = tk.Button(window, text='ANS Sheet', command=generateAnsSheet)
-calculate_btn.pack()
+anssheetGEN_btn = tk.Button(window, text='ANS Sheet', command=generateAnsSheet)
+anssheetGEN_btn.pack()
 
 window.mainloop()
