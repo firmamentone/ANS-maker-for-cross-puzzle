@@ -1,4 +1,5 @@
-#JAN 10th 2020 T.I. fixed unwanted brackets issue
+#JAN 11th 2020 T.I. fixed "string ends with empty" problem
+#JAN 10th 2020 T.I. fixed unwanted brackets problem
 #JAN 10th 2020 T.I. GUI framework
 #JAN 10th 2020 T.I. refactor
 #JAN 10th 2020 T.I. modified output structure (RankedlineList1)
@@ -7,15 +8,16 @@
 import tkinter as tk
 
 def generateAnsSheet():
-    listget1=ansInput_entry.get("0.0", "end-1c").splitlines()
-    lineList1 = [line.rstrip('\n') for line in listget1 if (line.startswith('Across') is False) and (line.startswith('Down') is False)]
+    listget1=ansInput_text.get("1.0", "end-1c").splitlines()
+   
+    lineList1 = [line.rstrip(' \n') for line in listget1 if (line.startswith('Across') is False) and (line.startswith('Down') is False)]
     RankedlineList1=[None] * len(lineList1)
     for line in lineList1:
-        ke=line[0]
+        ke=line[:line.index('.')]
         RankedlineList1[int(ke)-1]=line
 
-    listget2=queInput_entry.get("0.0", "end-1c").splitlines()
-    lineList2 = [line.rstrip('\n') for line in listget2]
+    listget2=descripInput_text.get("1.0", "end-1c").splitlines()
+    lineList2 = [line.rstrip(' \n') for line in listget2]
 
     for lineidx in range(len(RankedlineList1)):
         line=RankedlineList1[lineidx]
@@ -25,31 +27,28 @@ def generateAnsSheet():
             if lineT2==lineT:
                 lineListT=[line[:line.index('.')],line[line.index(' ')+1:],line2[:line2.index(' ')]]
                 RankedlineList1[lineidx]=lineListT
-    print (RankedlineList1)
 
     for [number,desc,title] in RankedlineList1:
-        print(number,desc,title)
         listString=" ".join([number,desc,":",title,'\n'])
-        ansSheetOutut_entry.insert(tk.END,listString)
-    print([number,desc,title])
+        ansSheetOutput_text.insert("end",listString)
   
 
 window = tk.Tk()
 
-ansInput_entry = tk.Text(window)
-ansInput_entry["width"] = 50
-ansInput_entry["height"] = 10
-ansInput_entry.pack(side=tk.LEFT)
+ansInput_text = tk.Text(window)
+ansInput_text["width"] = 100
+ansInput_text["height"] = 10
+ansInput_text.pack()
 
-queInput_entry = tk.Text(window)
-queInput_entry["width"] = 50
-queInput_entry["height"] = 10
-queInput_entry.pack(side=tk.LEFT)
+descripInput_text = tk.Text(window)
+descripInput_text["width"] = 100
+descripInput_text["height"] = 10
+descripInput_text.pack()
 
-ansSheetOutut_entry = tk.Text(window)
-ansSheetOutut_entry["width"] = 50
-ansSheetOutut_entry["height"] = 10
-ansSheetOutut_entry.pack(side=tk.LEFT)
+ansSheetOutput_text = tk.Text(window)
+ansSheetOutput_text["width"] = 100
+ansSheetOutput_text["height"] = 10
+ansSheetOutput_text.pack()
 
 calculate_btn = tk.Button(window, text='ANS Sheet', command=generateAnsSheet)
 calculate_btn.pack()
